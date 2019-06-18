@@ -23,6 +23,7 @@ Red="$(tput bold; tput setaf 1)"
 #GreenBG="$(tput setab 2)"
 #LightGreen="$(tput bold ; tput setaf 2)"
 #Brown="$(tput setaf 3)"
+BrownBold="$(tput bold; tput setaf 3)"
 #BrownBG="$(tput setab 3)"
 Yellow="$(tput bold ; tput setaf 3)"
 Blue="$(tput setaf 4)"
@@ -34,6 +35,7 @@ PurpleBold="$(tput bold; tput setaf 5)"
 PurpleBG="$(tput setab 5)"
 #Pink="$(tput bold ; tput setaf 5)"
 Cyan="$(tput setaf 6)"
+CyanBold="$(tput bold; tput setaf 6)"
 #CyanBG="$(tput setab 6)"
 #LightCyan="$(tput bold ; tput setaf 6)"
 NC="$(tput sgr0)" # No Color
@@ -48,6 +50,12 @@ fi
 
 if echo ${HOSTNAME} |grep -qi prod; then 
 	hostname_color="${BlueBold}" 
+else
+	hostname_color="${Red}"
+fi 
+
+if echo ${HOSTNAME} |grep -qi dev; then 
+	hostname_color="${CyanBold}" 
 else
 	hostname_color="${Red}"
 fi 
