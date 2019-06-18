@@ -25,7 +25,8 @@ Red="$(tput bold; tput setaf 1)"
 #Brown="$(tput setaf 3)"
 #BrownBG="$(tput setab 3)"
 Yellow="$(tput bold ; tput setaf 3)"
-#Blue="$(tput setaf 4)"
+Blue="$(tput setaf 4)"
+BlueBold="$(tput bold; tput setaf 4)"
 #BlueBG="$(tput setab 4)"
 #LightBlue="$(tput bold ; tput setaf 4)"
 Purple="$(tput setaf 5)"
@@ -45,6 +46,12 @@ else
     color_path=${Yellow}
 fi
 
+if echo ${HOSTNAME} |grep -qi prod; then 
+	hostname_color="${BlueBold}" 
+else
+	hostname_color="${Red}"
+fi 
+
 # Git
 #GIT_PS1_SHOWDIRTYSTATE='y'
 #GIT_PS1_SHOWSTASHSTATE='y'
@@ -52,7 +59,7 @@ fi
 #GIT_PS1_DESCRIBE_STYLE='contains'
 #GIT_PS1_SHOWUPSTREAM='auto'
 
-PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]$(hostname) \[$color_path\]\W \[$Red\]${blah}\[$NC\] '
+PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$hostname_color\]${HOSTNAME} \[$color_path\]\W \[$Red\]${blah}\[$NC\] '
 
 
 #eof
