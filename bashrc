@@ -39,8 +39,10 @@ NC="$(tput sgr0)" # No Color
 
 if [ "${EUID}" -ne 0 ]; then
     blah="\$"
+    color_path=${White}
 else
     blah="#"
+    color_path=${Yellow}
 fi
 
 # Git
@@ -50,7 +52,7 @@ fi
 #GIT_PS1_DESCRIBE_STYLE='contains'
 #GIT_PS1_SHOWUPSTREAM='auto'
 
-PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]$(hostname) \[$White\]\W\[$White\]\[$Yellow\] \[$Red\]${blah}\[$NC\] '
+PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]$(hostname) \[$color_path\]\W \[$Red\]${blah}\[$NC\] '
 
 
 #eof
