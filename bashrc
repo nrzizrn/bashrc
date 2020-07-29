@@ -1,13 +1,21 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+[ -f "~/.local_settings" ] && source ~/.local_settings
 source ~/.git-prompt.sh
 source ~/.git-completion.bash
 
+source /etc/profile.env
+
 export LS_OPTIONS='--color=auto -N'
+
+
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
+
+alias bjson='python -m json.tool'
+
 
 # Colors
 #Black="$(tput setaf 1)"
@@ -48,26 +56,11 @@ else
     color_path=${Yellow}
 fi
 
-if echo ${HOSTNAME} |grep -qi prod; then 
-	hostname_color="${BlueBold}" 
-else
-	hostname_color="${Red}"
-fi 
-
-if echo ${HOSTNAME} |grep -qi dev; then 
-	hostname_color="${CyanBold}" 
-else
-	hostname_color="${Red}"
-fi 
-
-# Git
-#GIT_PS1_SHOWDIRTYSTATE='y'
-#GIT_PS1_SHOWSTASHSTATE='y'
-#GIT_PS1_SHOWUNTRACKEDFILES='y'
-#GIT_PS1_DESCRIBE_STYLE='contains'
-#GIT_PS1_SHOWUPSTREAM='auto'
+hostname_color=${Red}
 
 PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$hostname_color\]${HOSTNAME} \[$color_path\]\W \[$Red\]${blah}\[$NC\] '
 
+# Makefile auto completion
+complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' ?akefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
 
 #eof
