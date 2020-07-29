@@ -2,10 +2,11 @@
 [ -z "$PS1" ] && return
 
 [ -f "~/.local_settings" ] && source ~/.local_settings
+
+[ -f /etc/profile.env ] && source /etc/profile.env
+
 source ~/.git-prompt.sh
 source ~/.git-completion.bash
-
-source /etc/profile.env
 
 export LS_OPTIONS='--color=auto -N'
 
@@ -49,7 +50,9 @@ CyanBold="$(tput bold; tput setaf 6)"
 NC="$(tput sgr0)" # No Color
 
 if [ "${EUID}" -ne 0 ]; then
-    PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]${HOSTNAME} \[${White}\]\W \[$Red\]\$\[$NC\] '
+    # server
+    #     PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]\[\e[1;36m\]\h \[${White}\]\W \[$Red\]\$\[$NC\] '
+    PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]\h \[${White}\]\W \[$Red\]\$\[$NC\] '
 else
     # PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]${HOSTNAME} \[${Yellow}\]\W \[$Red\]#\[$NC\] '
     PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")${NC}${Red}\u\[\e[1;33m\]@\[\e[1;36m\]\h \[\e[1;33m\]\W \[\e[1;35m\]\$ \[\e[0m\]'
