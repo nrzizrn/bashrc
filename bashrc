@@ -49,16 +49,11 @@ CyanBold="$(tput bold; tput setaf 6)"
 NC="$(tput sgr0)" # No Color
 
 if [ "${EUID}" -ne 0 ]; then
-    blah="\$"
-    color_path=${White}
+    PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]${HOSTNAME} \[${White}\]\W \[$Red\]\$\[$NC\] '
 else
-    blah="#"
-    color_path=${Yellow}
+    # PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$Red\]${HOSTNAME} \[${Yellow}\]\W \[$Red\]#\[$NC\] '
+    PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")${NC}${Red}\u\[\e[1;33m\]@\[\e[1;36m\]\h \[\e[1;33m\]\W \[\e[1;35m\]\$ \[\e[0m\]'
 fi
-
-hostname_color=${Red}
-
-PS1='$(__git_ps1 "\[$PurpleBold\](%s) ")\[$hostname_color\]${HOSTNAME} \[$color_path\]\W \[$Red\]${blah}\[$NC\] '
 
 # Makefile auto completion
 complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' ?akefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
