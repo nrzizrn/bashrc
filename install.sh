@@ -34,7 +34,7 @@ install
 
 # install for root as well?
 if ask_yes_no "do you want to install it for root?"; then
-    sudo bash -x -c "$(declare -f install; declare -f ask_yes_no); install"
+    sudo bash -c "$(declare -f install; declare -f ask_yes_no); install"
 fi
 
 
